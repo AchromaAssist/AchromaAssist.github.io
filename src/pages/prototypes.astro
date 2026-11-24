@@ -1,0 +1,142 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+
+const prototypes = (await getCollection('prototypes')).sort((a, b) => a.data.order - b.data.order);
+const rendered = await Promise.all(prototypes.map(async (p) => ({ p, ...(await render(p)) })));
+---
+
+<Base
+  title="Prototypes"
+  description="Working prototypes of AchromaAssist: AR color detection and labeling running on consumer AR glasses."
+>
+  <section class="page-head">
+    <div class="container">
+      <span class="eyebrow">Prototypes</span>
+      <h1>What we have built so far</h1>
+      <p class="lead">
+        Experimental builds running on real AR glasses. Everything is open source. Try it, break
+        it, tell us what you find.
+      </p>
+    </div>
+  </section>
+
+  <section class="list">
+    <div class="container">
+      {
+        rendered.map(({ p, Content }) => (
+          <article class="proto card" id={p.id}>
+            {p.data.video && (
+              <div class="media">
+                <video
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  poster={p.data.video.poster}
+                  aria-label={p.data.video.alt}
+                >
+                  {p.data.video.webm && <source src={p.data.video.webm} type="video/webm" />}
+                  <source src={p.data.video.mp4} type="video/mp4" />
+                </video>
+              </div>
+            )}
+            <div class="body">
+              <div class="chips">
+                <span class="chip">{p.data.status}</span>
+                <span class="chip">{p.data.device}</span>
+                <span class="chip">Runs on {p.data.platform}</span>
+              </div>
+              <h2>{p.data.title}</h2>
+              <p class="summary">{p.data.summary}</p>
+              <div class="prose">
+                <Content />
+              </div>
+              <a class="btn btn-primary" href={p.data.repo}>
+                <Icon name="github" /> View source on GitHub
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-head {
+    padding-block: clamp(48px, 8vw, 96px) clamp(32px, 5vw, 56px);
+  }
+  .page-head .container {
+    display: grid;
+    gap: 20px;
+    justify-items: start;
+  }
+  .page-head .container > * {
+    max-width: 760px;
+  }
+  h1 {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    font-weight: 700;
+  }
+  .list {
+    padding-bottom: var(--section);
+  }
+  .list .container {
+    display: grid;
+    gap: 24px;
+  }
+  .proto {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(24px, 4vw, 48px);
+    align-items: start;
+  }
+  .media {
+    position: relative;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1.5px solid var(--line);
+    background: #000;
+  }
+  video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+  .body {
+    display: grid;
+    gap: 16px;
+    justify-items: start;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+  }
+  .summary {
+    font-size: 1.1875rem;
+  }
+  .prose {
+    color: var(--fg);
+    font-size: 1rem;
+  }
+  .prose :global(p + ul),
+  .prose :global(p + p) {
+    margin-top: 12px;
+  }
+  .prose :global(ul) {
+    margin: 0;
+    padding-left: 1.2em;
+  }
+  @media (max-width: 860px) {
+    .proto {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <style>g{stroke:#121212}@media (prefers-color-scheme:dark){g{stroke:#f5f5f2}}</style>
+  <g transform="translate(0 30)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  
+  <!-- brow bar -->
+  <path d="M5 13 Q64 6 123 13" stroke-width="8"/>
+  <!-- lenses -->
+  <path d="M12 13 L16 37 Q18 49 31 49 H39 Q52 49 54 37 L57 15" stroke-width="5.5"/>
+  <path d="M116 13 L112 37 Q110 49 97 49 H89 Q76 49 74 37 L71 15" stroke-width="5.5"/>
+  <!-- bridge -->
+  <path d="M57 17 Q64 12 71 17" stroke-width="5"/>
+  <!-- letters -->
+  <path d="M26 42 L35 19 L44 42 M29.5 34 H40.5" stroke-width="5"/>
+  <path d="M84 42 L93 19 L102 42 M87.5 34 H98.5" stroke-width="5"/>
+</g>
+</svg>

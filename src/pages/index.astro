@@ -1,0 +1,350 @@
+---
+import Base from '../layouts/Base.astro';
+import SwatchDemo from '../components/SwatchDemo.astro';
+import Icon from '../components/Icon.astro';
+import { SITE } from '../site';
+
+const useCases = [
+  {
+    icon: 'eye' as const,
+    title: 'Augmented color identification',
+    text: 'Point your gaze at an object and see its color name, anchored right next to it.',
+  },
+  {
+    icon: 'tag' as const,
+    title: 'Contextual object labeling',
+    text: 'Traffic lights, fruit ripeness, clothing, maps: labels that make sense for what you are looking at.',
+  },
+  {
+    icon: 'contrast' as const,
+    title: 'Contrast enhancement',
+    text: 'Boost edges and separation where colors with similar brightness blur into one gray.',
+  },
+];
+
+const roadmap = [
+  {
+    date: 'December 2025',
+    title: 'Research & concept validation',
+    text: 'Initial research, concept validation and early hardware compatibility checks.',
+  },
+  {
+    date: 'January 2026',
+    title: 'Development kickoff',
+    text: 'Building a prototype for XREAL AR glasses and the Viture Luma Ultra.',
+    link: { href: '/prototypes', label: 'See current prototypes' },
+  },
+];
+---
+
+<Base>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Open research project</span>
+        <h1>Building AR aids for achromatopsia and color blindness</h1>
+        <p class="lead">
+          A research prototype helping people with complete color blindness navigate the world with
+          confidence and independence.
+        </p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#get-involved">Become an early tester</a>
+          <a class="btn btn-ghost" href="/prototypes">
+            See the prototype <Icon name="arrow" />
+          </a>
+        </div>
+      </div>
+      <SwatchDemo />
+    </div>
+  </section>
+
+  <!-- CHALLENGE -->
+  <section class="section" id="challenge">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">The challenge</span>
+        <h2>A world in grayscale</h2>
+      </div>
+      <div class="two-col">
+        <p class="lead">
+          Achromatopsia is a rare form of complete color blindness. The world appears only in
+          shades of gray, often with strong light sensitivity and reduced sharpness. Everyday tasks
+          like matching clothes, reading maps, picking fruit or understanding traffic lights become
+          difficult and sometimes unsafe.
+        </p>
+        <p>
+          AchromaAssist is a research prototype of an augmented reality app for modern AR glasses.
+          It combines AR and AI to help people with severe color vision deficiencies, particularly
+          achromatopsia, with everyday tasks.
+        </p>
+      </div>
+      <ul class="cases">
+        {
+          useCases.map((c) => (
+            <li class="card">
+              <Icon name={c.icon} class="case-icon" />
+              <h3>{c.title}</h3>
+              <p>{c.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="section" id="roadmap">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Roadmap</span>
+        <h2>Where we are going</h2>
+        <p class="lead">
+          Prototypes target <a href="https://www.xreal.com/">XREAL</a> and Viture AR glasses.
+        </p>
+      </div>
+      <ol class="timeline">
+        {
+          roadmap.map((r) => (
+            <li>
+              <span class="when">{r.date}</span>
+              <div class="what">
+                <h3>{r.title}</h3>
+                <p>{r.text}</p>
+                {r.link && (
+                  <a class="more" href={r.link.href}>
+                    {r.link.label} <Icon name="arrow" />
+                  </a>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- GET INVOLVED -->
+  <section class="section" id="get-involved">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Join the journey</span>
+        <h2>Help shape the project</h2>
+      </div>
+      <div class="involve">
+        <article class="card">
+          <span class="chip">Testers</span>
+          <h3>Be an early tester</h3>
+          <p>
+            If you have achromatopsia or severe color blindness, your real-world feedback is crucial
+            for the project.
+          </p>
+        </article>
+        <article class="card">
+          <span class="chip">Contributors</span>
+          <h3>Participate in development</h3>
+          <p>
+            Developers, accessibility experts, low-vision specialists and researchers: help with
+            code, testing protocols or user-study design.
+          </p>
+        </article>
+      </div>
+      <div class="contact card">
+        <div>
+          <p class="contact-label">Drop us an email</p>
+          <a class="contact-mail" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        </div>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href={`mailto:${SITE.email}`}><Icon name="mail" /> Email us</a>
+          <a class="btn btn-ghost" href={SITE.github}><Icon name="github" /> GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding-block: clamp(48px, 8vw, 112px) var(--section);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: center;
+  }
+  .hero-copy {
+    display: grid;
+    gap: 24px;
+    justify-items: start;
+  }
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+  }
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: clamp(24px, 5vw, 64px);
+    margin-bottom: clamp(32px, 5vw, 56px);
+  }
+  .two-col p:last-child {
+    color: var(--fg);
+  }
+
+  .cases {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .cases li {
+    display: grid;
+    gap: 12px;
+    align-content: start;
+  }
+  .cases h3 {
+    font-size: 1.25rem;
+  }
+  .cases p {
+    color: var(--fg);
+    font-size: 1rem;
+  }
+  :global(.case-icon) {
+    width: 28px;
+    height: 28px;
+    color: var(--hud);
+    margin-bottom: 8px;
+  }
+
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-left: 1px solid var(--line);
+    margin-left: 6px;
+  }
+  .timeline li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 8px 32px;
+    padding: 0 0 40px 32px;
+  }
+  .timeline li:last-child {
+    padding-bottom: 0;
+  }
+  .timeline li::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    background: var(--bg);
+    border: 2px solid var(--hud);
+  }
+  .when {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--fg);
+    padding-top: 3px;
+  }
+  .what {
+    display: grid;
+    gap: 8px;
+    max-width: 640px;
+  }
+  .what h3 {
+    font-size: 1.375rem;
+  }
+  .what p {
+    color: var(--fg);
+  }
+  .more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    justify-self: start;
+  }
+  .more :global(svg) {
+    width: 16px;
+    height: 16px;
+  }
+
+  .involve {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .involve .card {
+    display: grid;
+    gap: 12px;
+    align-content: start;
+    justify-items: start;
+  }
+  .involve h3 {
+    font-size: 1.5rem;
+    margin-top: 6px;
+  }
+  .involve p {
+    color: var(--fg);
+  }
+  .contact {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .contact-label {
+    color: var(--fg);
+    font-size: 1rem;
+  }
+  .contact-mail {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 650;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+  .contact-mail:hover {
+    text-decoration: underline;
+  }
+  .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid,
+    .two-col {
+      grid-template-columns: 1fr;
+    }
+    .cases {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 640px) {
+    .involve {
+      grid-template-columns: 1fr;
+    }
+    .timeline li {
+      grid-template-columns: 1fr;
+      padding-left: 24px;
+    }
+  }
+</style>

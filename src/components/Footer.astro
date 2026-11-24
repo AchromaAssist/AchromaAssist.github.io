@@ -1,0 +1,80 @@
+---
+import Logo from './Logo.astro';
+import { SITE } from '../site';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container grid">
+    <div class="about">
+      <a href="/" class="brand" aria-label={`${SITE.name} home`}>
+        <Logo size={40} />
+        <span>Achroma<b>Assist</b></span>
+      </a>
+      <p>{SITE.tagline}</p>
+    </div>
+    <ul class="links">
+      <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+      <li><a href={SITE.github}>GitHub</a></li>
+      <li><a href="/prototypes">Prototypes</a></li>
+    </ul>
+  </div>
+  <div class="container legal">
+    <p>© {year} AchromaAssist. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--line);
+    background: var(--bg);
+    padding-block: 48px 32px;
+    font-size: 1rem;
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .about {
+    display: grid;
+    gap: 14px;
+    max-width: 420px;
+  }
+  .about p {
+    color: var(--fg);
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .brand b {
+    font-weight: 750;
+  }
+  .links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+    align-content: start;
+  }
+  .links a {
+    color: var(--fg);
+    overflow-wrap: anywhere;
+  }
+  .links a:hover {
+    color: var(--fg);
+  }
+  .legal {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    color: var(--fg);
+    font-size: 0.9375rem;
+  }
+</style>

@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found">
+  <section class="nf">
+    <div class="container">
+      <span class="eyebrow">404</span>
+      <h1>Nothing to see here</h1>
+      <p class="lead">Even with color labels, we couldn't find this page.</p>
+      <a class="btn btn-primary" href="/">Back to home</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    padding-block: clamp(80px, 14vw, 180px);
+  }
+  .nf .container {
+    display: grid;
+    gap: 20px;
+    justify-items: start;
+  }
+  h1 {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+  }
+</style>
